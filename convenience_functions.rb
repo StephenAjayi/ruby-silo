@@ -46,12 +46,41 @@ def link_caves()
   end
 end
 
-def finish_caves ()
+def finish_caves()
   #Link the rest of the caves with one-way tunnels
   cave_numbers.each do |cave|
     while caves[cave].length < 3
       passage_to = choose_cave(cave_numbers)
       caves[cave].push(passage_to)
     end
+  end
+end
+
+def prompt()
+  #Get player imput
+  puts ">"
+  gets.chomp()
+end
+
+def print_location(player_location)
+  #Tell the player about where they are
+  puts "You are in cave #{player_location}"
+  puts "From here you can see caves:"
+  puts "#{caves[player_location]}"
+  if wumpus_location in caves[player_location]
+    puts "I smell a wumpus!"
+  end
+end
+
+def get_next_location()
+  #Get the players next location
+  print "Which cave next"
+  player_input = prompt()
+  if(!player_input.is_a?(Integer) || !caves[player_location].include?(player_input.to_i))
+    puts "#{player_input}?"
+    puts "Thats not a direction that I can see"
+    return Null
+  else
+    return player_input.to_i
   end
 end
