@@ -38,11 +38,10 @@ class Caves
 
   def setup_caves(cave_numbers)
     #Create the starting list of caves
-    caves = @caves
     cave_numbers.each do
-      caves.push([])
+      @caves.push([])
     end
-    return caves
+    return @caves
   end
 
   def link_caves()
@@ -84,14 +83,14 @@ class Caves
 
   def get_next_location(player_location)
     #Get the players next location
-    puts "Which cave next?"
+    puts "\n" +  "Which cave next?"
     player_input = prompt()
-    if(!player_input.is_a?(Integer) || !@caves[player_location].include?(player_input.to_i))
-      puts "#{player_input}?"
+    if(!player_input.is_a?(Integer) || !@caves[player_location].include?(player_input))
+      puts  "\n" + "#{player_input}?"
       puts "Thats not a direction that I can see"
       return nil
     else
-      return player_input.to_i
+      return player_input
     end
   end
 end
@@ -117,7 +116,7 @@ end
 while true
   cave_args.print_location(player_location, wumpus_location)
   new_location = cave_args.get_next_location(player_location)
-  puts new_location
+  puts "\n"
   if new_location != nil
     player_location = new_location
     if player_location == wumpus_location
